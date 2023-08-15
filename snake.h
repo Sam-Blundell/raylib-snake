@@ -2,6 +2,7 @@
 #define SNAKE_H
 
 #include "raylib.h"
+#include "window.h"
 
 #define MAX_SNAKE_LENGTH 256
 
@@ -14,8 +15,7 @@ struct snake {
 
 struct snake create_snake(Vector2 start_position);
 void turn_snake(struct snake *snake);
-void update_snake(struct snake *snake);
+void update_snake(struct snake *snake, struct game_window);
 void draw_snake(struct snake snake);
-void eat_pellet(struct snake *snake);
 
 #endif // SNAKE_H
