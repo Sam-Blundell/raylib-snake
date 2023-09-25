@@ -27,7 +27,5 @@ struct game_window {
 
 struct game_window create_game_window(const char *title, int width, int height);
 void increment_score(struct game_window *window);
-void start_screen();
-void game_over();
 
 #endif // WINDOW_H

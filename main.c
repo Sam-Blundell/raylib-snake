@@ -16,7 +16,7 @@ int main() {
     struct pellet pellet = create_pellet(window, snake);
 
     while (!WindowShouldClose()) {
-        draw_screen(&window, &snake, &pellet);
+        draw_screen(window, &snake, &pellet);
         process_input(&window, &snake);
         update_game(&window, &snake, &pellet);
     }

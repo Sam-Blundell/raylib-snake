@@ -22,8 +22,8 @@ Vector2 move_pellet(struct game_window window, struct snake snake) {
 struct pellet create_pellet(struct game_window window, struct snake snake) {
     struct pellet pellet = {
         .width = 20,
+        .position = move_pellet(window, snake),
     };
-    pellet.position = move_pellet(window, snake);
     return pellet;
 }
 

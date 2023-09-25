@@ -38,7 +38,7 @@ void turn_snake(struct snake *snake, char direction) {
             }
             break;
     }
-};
+}
 
 void update_snake(struct snake *snake, struct game_window window) {
     int move_distance = snake->width;
@@ -73,4 +73,4 @@ void draw_snake(struct snake snake) {
     for (int i = 1; i < snake.length; i++) {
         DrawRectangleV(snake.body[i], (Vector2){snake.width, snake.width}, WHITE);
     }
-};
+}

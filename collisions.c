@@ -15,4 +15,4 @@ void snake_collide(struct snake *snake, struct game_window *window) {
             window->state = GAME_OVER;
         }
     }
-};
+}

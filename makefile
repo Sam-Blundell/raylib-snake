@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -I/opt/homebrew/opt/raylib/include -Wall -g
+CFLAGS = -I/opt/homebrew/opt/raylib/include -Wall -Wextra -Werror -pedantic -Wconversion -g
 LIBS = -L/opt/homebrew/opt/raylib/lib -lraylib -framework IOKit -framework Cocoa -framework OpenGL
 
 SRC = main.c \
