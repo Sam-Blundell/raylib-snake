@@ -1,32 +1,41 @@
 #include "raylib.h"
 #include "snake.h"
 
-#define LEFT 'l'
-#define RIGHT 'r'
-#define UP 'u'
-#define DOWN 'd'
-
 struct snake create_snake(Vector2 start_position) {
     struct snake snake = {
         .length = 1,
         .width = 20,
         .direction = RIGHT,
+        .turning = false,
     };
     snake.body[0] = start_position;
     return snake;
 }
 
-void turn_snake(struct snake *snake) {
+void turn_snake(struct snake *snake, char direction) {
+    if (snake->turning) return;
     switch (snake->direction) {
         case UP:
         case DOWN:
-            if (IsKeyPressed(KEY_LEFT)) snake->direction = LEFT;
-            if (IsKeyPressed(KEY_RIGHT)) snake->direction = RIGHT;
+            if (direction == LEFT) {
+                snake->direction = LEFT;
+                snake->turning = true;
+            }
+            if (direction == RIGHT) {
+                snake->direction = RIGHT;
+                snake->turning = true;
+            }
             break;
         case LEFT:
         case RIGHT:
-            if (IsKeyPressed(KEY_UP)) snake->direction = UP;
-            if (IsKeyPressed(KEY_DOWN)) snake->direction = DOWN;
+            if (direction == UP) {
+                snake->direction = UP;
+                snake->turning = true;
+            }
+            if (direction == DOWN) {
+                snake->direction = DOWN;
+                snake->turning = true;
+            }
             break;
     }
 };
@@ -56,6 +65,7 @@ void update_snake(struct snake *snake, struct game_window window) {
             if (head->x > window.width - snake->width) head->x = 0;
             break;
     }
+    snake->turning = false;
 }
 
 void draw_snake(struct snake snake) {

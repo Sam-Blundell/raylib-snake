@@ -12,8 +12,10 @@ struct game_window create_game_window(const char *title, int width, int height) 
         .height = height,
         .center = (Vector2){ width / 2.0f, height / 2.0f },
         .score = 0,
+        .score_string = "score: 0",
         .delta_t = 0,
         .update_rate = STARTING_UPDATE_RATE,
+        .state = START,
     };
     return window;
 }
@@ -26,6 +28,10 @@ void increment_score(struct game_window *window) {
     }
 }
 
+void start_screen() {
+    DrawText("Press Enter to Start", 300, 300, 20, RED);
+}
+
 void game_over() {
-    DrawText("Game Over", 400, 300, 20, RED);
+    DrawText("Game Over", 350, 300, 20, RED);
 }
