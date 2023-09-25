@@ -9,7 +9,7 @@ bin/snake: $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 obj/%.o dep/%.d: src/%.c
-	@mkdir -p obj dep
+	@mkdir -p obj dep bin
 	$(CC) $(CFLAGS) -c $< -o obj/$*.o
 	$(CC) $(CFLAGS) -MM $< -MT obj/$*.o -MF dep/$*.d
 
