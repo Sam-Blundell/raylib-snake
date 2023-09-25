@@ -1,19 +1,22 @@
 CC = cc
-CFLAGS = -I/opt/homebrew/opt/raylib/include -Wall -Wextra -Werror -pedantic -Wconversion -g
+CFLAGS = -Iinclude -I/opt/homebrew/opt/raylib/include -Wall -Wextra -Werror -pedantic -Wconversion -g
 LIBS = -L/opt/homebrew/opt/raylib/lib -lraylib -framework IOKit -framework Cocoa -framework OpenGL
+SRC = $(wildcard src/*.c)
+OBJ = $(SRC:src/%.c=obj/%.o)
+DEPS = $(OBJ:obj/%.o=dep/%.d)
 
-SRC = main.c \
-	  window.c \
-	  snake.c \
-	  pellet.c \
-	  collisions.c \
-	  input.c \
-	  draw.c \
-	  update.c
+bin/snake: $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
-snake: $(SRC)
-	$(CC) $(CFLAGS) -o snake $(SRC) $(LIBS)
+obj/%.o dep/%.d: src/%.c
+	@mkdir -p obj dep
+	$(CC) $(CFLAGS) -c $< -o obj/$*.o
+	$(CC) $(CFLAGS) -MM $< -MT obj/$*.o -MF dep/$*.d
 
 clean:
-	rm -f snake
-	rm -rf snake.dSYM
+	rm -f bin/snake $(OBJ) $(DEPS)
+	rm -rf snake.dSYM bin obj dep
+
+.PHONY: clean
+
+-include $(DEPS)
