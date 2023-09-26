@@ -1,4 +1,7 @@
-#include "collisions.h"
+#include "raylib.h"
+#include "window.h"
+#include "snake.h"
+#include "pellet.h"
 
 void eat_pellet(struct snake *snake, struct pellet *pellet, struct game_window *window) {
     if (snake->body[0].x == pellet->position.x && snake->body[0].y == pellet->position.y) {

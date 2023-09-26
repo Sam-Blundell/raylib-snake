@@ -14,7 +14,7 @@ void process_input(struct game_window *window, struct snake *snake) {
         if (IsKeyPressed(KEY_DOWN)) turn_snake(snake, DOWN);
         break;
     case GAME_OVER:
-        if (IsKeyPressed(KEY_ENTER)) window->state = PLAY;
+        if (IsKeyPressed(KEY_R)) reset_game(window, snake);
         break;
     default:
         break;

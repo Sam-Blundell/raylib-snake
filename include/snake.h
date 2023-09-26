@@ -1,14 +1,14 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-#include "raylib.h"
 #include "window.h"
 
 #define MAX_SNAKE_LENGTH 256
-#define LEFT 'l'
-#define RIGHT 'r'
-#define UP 'u'
-#define DOWN 'd'
+
+extern const char LEFT;
+extern const char RIGHT;
+extern const char UP;
+extern const char DOWN;
 
 struct snake {
     Vector2 body[MAX_SNAKE_LENGTH];
@@ -18,9 +18,9 @@ struct snake {
     bool turning;
 };
 
-struct snake create_snake(Vector2 start_position);
-void turn_snake(struct snake *snake, char direction);
-void update_snake(struct snake *snake, struct game_window);
-void draw_snake(struct snake snake);
+struct snake create_snake(Vector2);
+void turn_snake(struct snake*, char);
+void update_snake(struct snake*, struct game_window);
+void draw_snake(struct snake);
 
 #endif // SNAKE_H

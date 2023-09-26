@@ -1,25 +1,33 @@
-#include <stdio.h>
 #include "raylib.h"
 #include "window.h"
 #include "snake.h"
 #include "pellet.h"
-#include "input.h"
-#include "draw.h"
-#include "update.h"
+#include "drawupdate.h"
+#ifdef __EMSCRIPTEN__
+    #include <emscripten.h>
+#endif
 
 int main() {
     SetConfigFlags(FLAG_VSYNC_HINT);
     SetTargetFPS(144);
-    struct game_window window = create_game_window("Snake", WINDOW_WIDTH, WINDOW_HEIGHT);
-    InitWindow(window.width, window.height, "Snake");
+    struct game_window window = create_game_window("Snek", WINDOW_WIDTH, WINDOW_HEIGHT);
+    InitWindow(window.width, window.height, "Snek");
     struct snake snake = create_snake(window.center);
     struct pellet pellet = create_pellet(window, snake);
 
-    while (!WindowShouldClose()) {
-        draw_screen(window, &snake, &pellet);
-        process_input(&window, &snake);
-        update_game(&window, &snake, &pellet);
-    }
+    #ifdef __EMSCRIPTEN__
+        struct game_data data = {
+            .window = &window,
+            .snake = &snake,
+            .pellet = &pellet,
+        };
+
+        emscripten_set_main_loop_arg(web_loop, &data, 0, 1);
+    #else
+        while (!WindowShouldClose()) {
+            draw_input_update(&window, &snake, &pellet);
+        }
+    #endif
 
     CloseWindow();
     return 0;

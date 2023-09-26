@@ -1,7 +1,6 @@
 #ifndef PELLET_H
 #define PELLET_H
 
-#include "raylib.h"
 #include "window.h"
 #include "snake.h"
 

@@ -1,6 +1,11 @@
 #include "raylib.h"
 #include "snake.h"
 
+const char LEFT = 'l';
+const char RIGHT = 'r';
+const char UP = 'u';
+const char DOWN = 'd';
+
 struct snake create_snake(Vector2 start_position) {
     struct snake snake = {
         .length = 1,
