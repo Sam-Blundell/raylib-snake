@@ -6,11 +6,12 @@
 #include "pellet.h"
 
 void draw_input_update(struct game_window *window, struct snake *snake, struct pellet *pellet) {
-    draw_screen(*window, snake, pellet);
     process_input(window, snake);
+    draw_screen(*window, snake, pellet);
     update_game(window, snake, pellet);
 }
 
-void web_loop(struct game_data *data) {
+void web_loop(void *dataPtr) {
+    struct game_data *data = (struct game_data*)dataPtr;
     draw_input_update(data->window, data->snake, data->pellet);
 }

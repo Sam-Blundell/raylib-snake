@@ -6,6 +6,6 @@
 #include "pellet.h"
 
 void draw_input_update(struct game_window*, struct snake*, struct pellet*);
-void web_loop(struct game_data*);
+void web_loop(void* dataPtr);
 
 #endif // DRAWUPDATE_H
