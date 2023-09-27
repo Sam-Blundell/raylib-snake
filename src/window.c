@@ -18,7 +18,7 @@ struct game_window create_game_window(const char *title, int width, int height) 
         .score = 0,
         .delta_t = 0,
         .update_rate = STARTING_UPDATE_RATE,
-        .state = START,
+        .state = START_MENU,
     };
     strncpy(window.score_string, "score: 0", SCORE_TEXT_LENGTH);
     return window;
@@ -32,7 +32,7 @@ void increment_score(struct game_window *window) {
     }
 }
 
-void reset_game(struct game_window *window, struct snake *snake) {
+void reset_game(struct game_window *window, struct snake *snake, enum game_state newState) {
     snake->length = 1;
     snake->direction = RIGHT;
     snake->turning = false;
@@ -40,5 +40,5 @@ void reset_game(struct game_window *window, struct snake *snake) {
     window->score = 0;
     strncpy(window->score_string, "score: 0", SCORE_TEXT_LENGTH);
     window->update_rate = STARTING_UPDATE_RATE;
-    window->state = PLAY;
+    window->state = newState;
 }

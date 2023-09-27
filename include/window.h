@@ -9,8 +9,10 @@ extern const int WINDOW_WIDTH;
 extern const int WINDOW_HEIGHT;
 
 enum game_state {
-    START,
+    START_MENU,
+    SETTINGS_MENU,
     PLAY,
+    PAUSE,
     GAME_OVER,
 };
 
@@ -37,6 +39,6 @@ struct snake;
 
 struct game_window create_game_window(const char*, int, int);
 void increment_score(struct game_window*);
-void reset_game(struct game_window*, struct snake*);
+void reset_game(struct game_window*, struct snake*, enum game_state);
 
 #endif // WINDOW_H

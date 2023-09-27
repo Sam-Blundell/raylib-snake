@@ -7,7 +7,9 @@
 void update_game(struct game_window* window, struct snake* snake, struct pellet* pellet) {
     window->delta_t += GetFrameTime();
     switch (window->state) {
-        case START:
+        case START_MENU:
+            break;
+        case SETTINGS_MENU:
             break;
         case PLAY:
             if (window->delta_t > window->update_rate) {
@@ -16,6 +18,8 @@ void update_game(struct game_window* window, struct snake* snake, struct pellet*
                 update_snake(snake, *window);
                 snake_collide(snake, window);
             }
+            break;
+        case PAUSE:
             break;
         case GAME_OVER:
             break;
