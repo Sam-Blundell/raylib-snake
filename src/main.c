@@ -32,3 +32,7 @@ int main() {
     CloseWindow();
     return 0;
 }
+
+// Adding a settings menu with the ability to turn on and off the border.
+// if the border is on we should also draw it which means we need to also
+// make sure that the pellets don't spawn on the border

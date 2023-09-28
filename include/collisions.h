@@ -7,5 +7,6 @@
 
 void eat_pellet(struct snake*, struct pellet*, struct game_window*);
 void snake_collide(struct snake*, struct game_window*);
+void border_collide(struct snake*, struct game_window*);
 
 #endif // COLLISIONS_H

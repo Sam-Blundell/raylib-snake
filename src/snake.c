@@ -6,6 +6,8 @@ const char RIGHT = 'r';
 const char UP = 'u';
 const char DOWN = 'd';
 
+bool noBorder = true;
+
 struct snake create_snake(Vector2 start_position) {
     struct snake snake = {
         .length = 1,
@@ -55,19 +57,19 @@ void update_snake(struct snake *snake, struct game_window window) {
     switch (snake->direction) {
         case UP:
             head->y -= move_distance;
-            if (head->y < 0) head->y = window.height - snake->width;
+            if (noBorder && head->y < 0) head->y = window.height - snake->width;
             break;
         case DOWN:
             head->y += move_distance;
-            if (head->y > window.height - snake->width) head->y = 0;
+            if (noBorder && head->y > window.height - snake->width) head->y = 0;
             break;
         case LEFT:
             head->x -= move_distance;
-            if (head->x < 0) head->x = window.width - snake->width;
+            if (noBorder && head->x < 0) head->x = window.width - snake->width;
             break;
         case RIGHT:
             head->x += move_distance;
-            if (head->x > window.width - snake->width) head->x = 0;
+            if (noBorder && head->x > window.width - snake->width) head->x = 0;
             break;
     }
     snake->turning = false;

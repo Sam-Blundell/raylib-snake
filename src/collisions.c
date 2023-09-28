@@ -19,3 +19,10 @@ void snake_collide(struct snake *snake, struct game_window *window) {
         }
     }
 }
+
+void border_collide(struct snake *snake, struct game_window *window) {
+    Vector2 head = snake->body[0];
+    if (head.x < 0 || head.x > window->width || head.y < 0 || head.y > window->height) {
+        window->state = GAME_OVER;
+    }
+}
