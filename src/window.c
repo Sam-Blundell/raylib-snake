@@ -6,8 +6,6 @@
 const float STARTING_UPDATE_RATE = 0.2f;
 const float MIN_UPDATE_RATE = 0.06f;
 const int SPEED_INTERVAL = 5;
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 600;
 
 struct game_window create_game_window(const char *title, int width, int height) {
     struct game_window window = {

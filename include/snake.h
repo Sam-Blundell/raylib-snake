@@ -20,7 +20,7 @@ struct snake {
 
 struct snake create_snake(Vector2);
 void turn_snake(struct snake*, char);
-void update_snake(struct snake*, struct game_window);
+void update_snake(struct snake*, struct game_window, bool noBorder);
 void draw_snake(struct snake);
 
 #endif // SNAKE_H

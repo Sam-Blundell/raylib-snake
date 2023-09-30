@@ -6,8 +6,6 @@ const char RIGHT = 'r';
 const char UP = 'u';
 const char DOWN = 'd';
 
-bool noBorder = true;
-
 struct snake create_snake(Vector2 start_position) {
     struct snake snake = {
         .length = 1,
@@ -47,7 +45,7 @@ void turn_snake(struct snake *snake, char direction) {
     }
 }
 
-void update_snake(struct snake *snake, struct game_window window) {
+void update_snake(struct snake *snake, struct game_window window, bool noBorder) {
     int move_distance = snake->width;
     Vector2 *head = &snake->body[0];
     for (int i = snake->length - 1; i > 0; i--) {

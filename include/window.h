@@ -2,11 +2,12 @@
 #define WINDOW_H
 
 #include "raylib.h"
+#include "settings.h"
 
 #define SCORE_TEXT_LENGTH 11
 
-extern const int WINDOW_WIDTH;
-extern const int WINDOW_HEIGHT;
+static const int WINDOW_WIDTH = 800;
+static const int WINDOW_HEIGHT = 600;
 
 enum game_state {
     START_MENU,
@@ -32,6 +33,7 @@ struct game_data {
     struct game_window *window;
     struct snake *snake;
     struct pellet *pellet;
+    struct settings *settings;
 };
 
 //forward definition of snake struct
