@@ -1,30 +1,32 @@
 ifdef web
 CC = emcc
-CFLAGS = -Os -Iinclude -I/Users/samblundell/raylib/src -Wall -s USE_GLFW=3
-LIBS = -L/Users/samblundell/raylib/src -lraylib
+CFLAGS = -Os -Iinclude -I./raylib -Wall
+LFLAGS = -s USE_GLFW=3 -s USE_LIBPNG=1 -s FULL_ES3=1 -s ALLOW_MEMORY_GROWTH=1
+LIBS = -L./raylib -lraylib
 OUTPUT = bin/snake.html
 else
 CC = cc
-CFLAGS = -Iinclude -I/opt/homebrew/opt/raylib/include -Wall -Wextra -Werror -pedantic -Wconversion -g
+CFLAGS = -Iinclude -I./raylib -Wall -Wextra -Werror -pedantic -Wconversion -g
+LFLAGS = 
 LIBS = -L/opt/homebrew/opt/raylib/lib -lraylib -framework IOKit -framework Cocoa -framework OpenGL
 OUTPUT = bin/snake
 endif
+
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=obj/%.o)
-DEPS = $(OBJ:obj/%.o=dep/%.d)
+DEPS = $(OBJ:.o=.d)
 
 $(OUTPUT): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+	$(CC) $(CFLAGS) $(LFLAGS) -o $@ $^ $(LIBS)
 
-obj/%.o dep/%.d: src/%.c
+-include $(DEPS)
+
+obj/%.o: src/%.c
 	@mkdir -p obj dep bin
-	$(CC) $(CFLAGS) -c $< -o obj/$*.o
-	$(CC) $(CFLAGS) -MM $< -MT obj/$*.o -MF dep/$*.d
+	$(CC) $(CFLAGS) -MMD -c $< -o $@
 
 clean:
 	rm -f bin/* $(OBJ) $(DEPS)
 	rm -rf snake.dSYM bin obj dep
 
 .PHONY: clean
-
--include $(wildcard dep/*.d)

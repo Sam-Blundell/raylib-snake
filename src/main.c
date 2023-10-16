@@ -11,8 +11,8 @@
 int main() {
     SetConfigFlags(FLAG_VSYNC_HINT);
     SetTargetFPS(144);
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Snek");
     struct game_window window = create_game_window("Snek", WINDOW_WIDTH, WINDOW_HEIGHT);
-    InitWindow(window.width, window.height, "Snek");
     struct snake snake = create_snake(window.center);
     struct pellet pellet = create_pellet(window, snake);
     struct settings settings = init_settings();
