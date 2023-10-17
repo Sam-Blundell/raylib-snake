@@ -2,10 +2,27 @@
 #include "window.h"
 #include "snake.h"
 #include "settings.h"
+#include "draw.h"
+#include "menu.h"
 
 void input_start(struct game_window *window) {
-    if (IsKeyPressed(KEY_ENTER)) window->state = PLAY;
-    if (IsKeyPressed(KEY_M)) window->state = SETTINGS_MENU;
+    if (IsKeyPressed(KEY_UP)) start_menu.currentOption = (start_menu.currentOption - 1 + start_menu.numOptions) % start_menu.numOptions;
+    if (IsKeyPressed(KEY_DOWN)) start_menu.currentOption = (start_menu.currentOption + 1) % start_menu.numOptions;
+    if (IsKeyPressed(KEY_ENTER)) {
+        switch (start_menu.currentOption) {
+            case START:
+                window->state = PLAY;
+                break;
+            case SETTINGS:
+                window->state = SETTINGS_MENU;
+                break;
+            case QUIT:
+                // Here, add functionality to exit the game.
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 void input_settings(struct game_window *window, struct settings *settings) {

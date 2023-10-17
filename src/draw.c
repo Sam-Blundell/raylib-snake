@@ -3,11 +3,23 @@
 #include "snake.h"
 #include "pellet.h"
 #include "settings.h"
+#include "draw.h"
+#include "menu.h"
 
-void draw_start() {
-    DrawText("SNEK", 340, 200, 40, WHITE);
-    DrawText("Press Enter to Start", 260, 300, 25, WHITE);
-    DrawText("Press M for Settings", 260, 350, 25, WHITE);
+int center_text(const char *title, int fontSize, int yPos) {
+    int xPos = (WINDOW_WIDTH / 2) - (MeasureText(title, fontSize) / 2);
+    DrawText(title, xPos, yPos, fontSize, WHITE);
+    return xPos;
+}
+
+void draw_menu(struct menu menu) {
+    int yPos = 100;
+    int xPos = center_text(menu.title, TITLE_FONT_SIZE, yPos);
+    yPos += SPACING;
+    for (int i = 0; i < menu.numOptions; i++) {
+        DrawText(menu.options[i], xPos, yPos + (i + 1) * SPACING, MENU_FONT_SIZE, WHITE);
+    }
+    DrawText("->", xPos - 50, yPos + (menu.currentOption + 1) * SPACING, MENU_FONT_SIZE, WHITE);
 }
 
 void draw_settings(struct settings settings) {
@@ -16,7 +28,6 @@ void draw_settings(struct settings settings) {
     DrawText(">", 120, selector_position(settings), 25, WHITE);
     DrawText(TextFormat("Borderless Mode: %s", settings.borderlessMode ? "ON" : "OFF"), 150, 220, 25, WHITE);
     DrawText(TextFormat("Sound: %s", settings.sound ? "ON" : "OFF"), 150, 280, 25, WHITE);
-    // DrawText("SNEK Colour: < WHITE >", 150, 340, 25, WHITE);
     DrawText(TextFormat("SNEK Colour: < %s >", "WHITE"), 150, 340, 25, WHITE);
 }
 
@@ -48,7 +59,7 @@ void draw_screen(struct game_window window, struct snake *snake, struct pellet *
     ClearBackground(BLACK);
     switch (window.state) {
     case START_MENU:
-        draw_start();
+        draw_menu(start_menu);
         break;
     case SETTINGS_MENU:
         draw_settings(settings);

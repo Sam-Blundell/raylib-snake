@@ -4,7 +4,7 @@
 struct settings init_settings() {
     struct settings settings = {
         .borderlessMode = true,
-        .sound = false,
+        .sound = true,
         .currentSetting = BORDERLESS_MODE,
     };
     return settings;
