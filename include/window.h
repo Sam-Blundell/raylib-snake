@@ -33,7 +33,6 @@ struct game_data {
     struct game_window *window;
     struct snake *snake;
     struct pellet *pellet;
-    struct settings *settings;
 };
 
 //forward definition of snake struct

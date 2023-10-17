@@ -4,7 +4,7 @@
 #include "pellet.h"
 #include "collisions.h"
 
-void update_game(struct game_window* window, struct snake* snake, struct pellet* pellet, bool noBorder) {
+void update_game(struct game_window* window, struct snake* snake, struct pellet* pellet) {
     window->delta_t += GetFrameTime();
     switch (window->state) {
         case START_MENU:
@@ -15,7 +15,7 @@ void update_game(struct game_window* window, struct snake* snake, struct pellet*
             if (window->delta_t > window->update_rate) {
                 eat_pellet(snake, pellet, window);
                 window->delta_t = 0;
-                update_snake(snake, *window, noBorder);
+                update_snake(snake, *window, true);
                 snake_collide(snake, window);
                 border_collide(snake, window);
             }

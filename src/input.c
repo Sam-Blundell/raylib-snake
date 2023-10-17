@@ -25,11 +25,24 @@ void input_start(struct game_window *window) {
     }
 }
 
-void input_settings(struct game_window *window, struct settings *settings) {
-    if (IsKeyPressed(KEY_M)) window->state = START_MENU;
-    if (IsKeyPressed(KEY_UP)) settings->currentSetting = (settings->currentSetting - 1 + TOTAL_SETTINGS) % TOTAL_SETTINGS;
-    if (IsKeyPressed(KEY_DOWN)) settings->currentSetting = (settings->currentSetting + 1) % TOTAL_SETTINGS;
-    if (IsKeyPressed(KEY_ENTER)) toggle_setting(settings);
+void input_settings(struct game_window *window) {
+    if (IsKeyPressed(KEY_UP)) settings_menu.currentOption = (settings_menu.currentOption - 1 + settings_menu.numOptions) % settings_menu.numOptions;
+    if (IsKeyPressed(KEY_DOWN)) settings_menu.currentOption = (settings_menu.currentOption + 1) % settings_menu.numOptions;
+    if (IsKeyPressed(KEY_ENTER)) {
+        switch (settings_menu.currentOption) {
+            case 0:
+                window->state = START_MENU;
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 void input_play(struct game_window *window, struct snake *snake) {
@@ -51,13 +64,13 @@ void input_gameover(struct game_window *window, struct snake *snake) {
     if (IsKeyPressed(KEY_S)) reset_game(window, snake, START_MENU);
 }
 
-void process_input(struct game_window *window, struct snake *snake, struct settings *settings) {
+void process_input(struct game_window *window, struct snake *snake) {
     switch (window->state) {
     case START_MENU:
         input_start(window);
         break;
     case SETTINGS_MENU:
-        input_settings(window, settings);
+        input_settings(window);
         break;
     case PLAY:
         input_play(window, snake);

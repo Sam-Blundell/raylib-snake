@@ -6,13 +6,13 @@
 #include "pellet.h"
 #include "settings.h"
 
-void draw_input_update(struct game_window *window, struct snake *snake, struct pellet *pellet, struct settings *settings) {
-    process_input(window, snake, settings);
-    draw_screen(*window, snake, pellet, *settings);
-    update_game(window, snake, pellet, settings->borderlessMode);
+void draw_input_update(struct game_window *window, struct snake *snake, struct pellet *pellet) {
+    process_input(window, snake);
+    draw_screen(*window, snake, pellet);
+    update_game(window, snake, pellet);
 }
 
 void web_loop(void *dataPtr) {
     struct game_data *data = (struct game_data*)dataPtr;
-    draw_input_update(data->window, data->snake, data->pellet, data->settings);
+    draw_input_update(data->window, data->snake, data->pellet);
 }

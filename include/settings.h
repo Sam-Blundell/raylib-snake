@@ -17,7 +17,5 @@ struct settings {
 };
 
 struct settings init_settings();
-int selector_position(struct settings);
-void toggle_setting(struct settings*);
 
 #endif // SETTINGS_H

@@ -22,15 +22,6 @@ void draw_menu(struct menu menu) {
     DrawText("->", xPos - 50, yPos + (menu.currentOption + 1) * SPACING, MENU_FONT_SIZE, WHITE);
 }
 
-void draw_settings(struct settings settings) {
-    DrawText("Settings", 320, 100, 40, WHITE);
-    DrawText("Press M to Return to Start Menu", 200, 160, 25, WHITE);
-    DrawText(">", 120, selector_position(settings), 25, WHITE);
-    DrawText(TextFormat("Borderless Mode: %s", settings.borderlessMode ? "ON" : "OFF"), 150, 220, 25, WHITE);
-    DrawText(TextFormat("Sound: %s", settings.sound ? "ON" : "OFF"), 150, 280, 25, WHITE);
-    DrawText(TextFormat("SNEK Colour: < %s >", "WHITE"), 150, 340, 25, WHITE);
-}
-
 void draw_play(struct snake *snake, struct pellet *pellet, struct game_window window) {
     draw_pellet(*pellet);
     draw_snake(*snake);
@@ -54,7 +45,7 @@ void draw_gameover(struct snake snake, struct pellet pellet) {
     DrawText("Press S To Return To Start Menu", 255, 350, 25, WHITE);
 }
 
-void draw_screen(struct game_window window, struct snake *snake, struct pellet *pellet, struct settings settings) {
+void draw_screen(struct game_window window, struct snake *snake, struct pellet *pellet) {
     BeginDrawing();
     ClearBackground(BLACK);
     switch (window.state) {
@@ -62,7 +53,7 @@ void draw_screen(struct game_window window, struct snake *snake, struct pellet *
         draw_menu(start_menu);
         break;
     case SETTINGS_MENU:
-        draw_settings(settings);
+        draw_menu(settings_menu);
         break;
     case PLAY:
         draw_play(snake, pellet, window);
