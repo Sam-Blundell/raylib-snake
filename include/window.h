@@ -2,7 +2,7 @@
 #define WINDOW_H
 
 #include "raylib.h"
-#include "settings.h"
+#include <stdbool.h>
 
 #define SCORE_TEXT_LENGTH 11
 
@@ -27,6 +27,8 @@ struct game_window {
     float delta_t;
     float update_rate;
     enum game_state state;
+    bool borderless_mode;
+    bool sound_enabled;
 };
 
 struct game_data {

@@ -2,7 +2,6 @@
 #include "window.h"
 #include "snake.h"
 #include "pellet.h"
-#include "settings.h"
 #include "draw.h"
 #include "menu.h"
 

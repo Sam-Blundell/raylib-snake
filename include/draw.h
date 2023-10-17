@@ -4,7 +4,6 @@
 #include "window.h"
 #include "snake.h"
 #include "pellet.h"
-#include "settings.h"
 
 void draw_play(struct snake*, struct pellet*, struct game_window);
 void draw_pause(struct snake, struct pellet);

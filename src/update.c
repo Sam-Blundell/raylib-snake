@@ -15,7 +15,7 @@ void update_game(struct game_window* window, struct snake* snake, struct pellet*
             if (window->delta_t > window->update_rate) {
                 eat_pellet(snake, pellet, window);
                 window->delta_t = 0;
-                update_snake(snake, *window, true);
+                update_snake(snake, *window);
                 snake_collide(snake, window);
                 border_collide(snake, window);
             }

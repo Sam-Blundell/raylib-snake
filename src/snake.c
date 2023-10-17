@@ -47,7 +47,7 @@ void turn_snake(struct snake *snake, char direction) {
     }
 }
 
-void update_snake(struct snake *snake, struct game_window window, bool noBorder) {
+void update_snake(struct snake *snake, struct game_window window) {
     int move_distance = snake->width;
     Vector2 *head = &snake->body[0];
     for (int i = snake->length - 1; i > 0; i--) {
@@ -57,19 +57,19 @@ void update_snake(struct snake *snake, struct game_window window, bool noBorder)
     switch (snake->direction) {
         case UP:
             head->y -= move_distance;
-            if (noBorder && head->y < 0) head->y = window.height - snake->width;
+            if (window.borderless_mode && head->y < 0) head->y = window.height - snake->width;
             break;
         case DOWN:
             head->y += move_distance;
-            if (noBorder && head->y > window.height - snake->width) head->y = 0;
+            if (window.borderless_mode && head->y > window.height - snake->width) head->y = 0;
             break;
         case LEFT:
             head->x -= move_distance;
-            if (noBorder && head->x < 0) head->x = window.width - snake->width;
+            if (window.borderless_mode && head->x < 0) head->x = window.width - snake->width;
             break;
         case RIGHT:
             head->x += move_distance;
-            if (noBorder && head->x > window.width - snake->width) head->x = 0;
+            if (window.borderless_mode && head->x > window.width - snake->width) head->x = 0;
             break;
     }
     snake->turning = false;

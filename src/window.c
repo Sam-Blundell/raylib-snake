@@ -17,6 +17,8 @@ struct game_window create_game_window(const char *title, int width, int height) 
         .delta_t = 0,
         .update_rate = STARTING_UPDATE_RATE,
         .state = START_MENU,
+        .borderless_mode = true,
+        .sound_enabled = true,
     };
     strncpy(window.score_string, "score: 0", SCORE_TEXT_LENGTH);
     return window;

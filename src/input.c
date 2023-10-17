@@ -1,7 +1,6 @@
 #include "raylib.h"
 #include "window.h"
 #include "snake.h"
-#include "settings.h"
 #include "draw.h"
 #include "menu.h"
 
@@ -17,7 +16,9 @@ void input_start(struct game_window *window) {
                 window->state = SETTINGS_MENU;
                 break;
             case QUIT:
-                // Here, add functionality to exit the game.
+                // unload_snake_sounds(snake.sounds);
+                CloseAudioDevice();
+                CloseWindow();
                 break;
             default:
                 break;
@@ -34,8 +35,10 @@ void input_settings(struct game_window *window) {
                 window->state = START_MENU;
                 break;
             case 1:
+                window->borderless_mode = !window->borderless_mode;
                 break;
             case 2:
+                window->sound_enabled = !window->sound_enabled;
                 break;
             case 3:
                 break;

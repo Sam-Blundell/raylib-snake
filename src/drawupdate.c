@@ -4,7 +4,6 @@
 #include "window.h"
 #include "snake.h"
 #include "pellet.h"
-#include "settings.h"
 
 void draw_input_update(struct game_window *window, struct snake *snake, struct pellet *pellet) {
     process_input(window, snake);

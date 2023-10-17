@@ -3,7 +3,6 @@
 
 #include "window.h"
 #include "snake.h"
-#include "settings.h"
 
 void input_start(struct game_window*);
 void input_settings(struct game_window*);
