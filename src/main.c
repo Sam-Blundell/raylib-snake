@@ -4,6 +4,7 @@
 #include "pellet.h"
 #include "settings.h"
 #include "drawupdate.h"
+#include "soundhandler.h"
 #ifdef __EMSCRIPTEN__
     #include <emscripten.h>
 #endif
@@ -33,6 +34,7 @@ int main() {
         }
     #endif
 
+    unload_snake_sounds(snake.sounds);
     CloseAudioDevice();
     CloseWindow();
     return 0;

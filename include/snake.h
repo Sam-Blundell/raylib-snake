@@ -2,6 +2,8 @@
 #define SNAKE_H
 
 #include "window.h"
+#include "raylib.h"
+#include "soundhandler.h"
 
 #define MAX_SNAKE_LENGTH 256
 
@@ -16,6 +18,7 @@ struct snake {
     int width;
     char direction;
     bool turning;
+    struct snake_sounds sounds;
 };
 
 struct snake create_snake(Vector2);

@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "snake.h"
+#include "soundhandler.h"
 
 const char LEFT = 'l';
 const char RIGHT = 'r';
@@ -12,6 +13,7 @@ struct snake create_snake(Vector2 start_position) {
         .width = 20,
         .direction = RIGHT,
         .turning = false,
+        .sounds = load_snake_sounds(),
     };
     snake.body[0] = start_position;
     return snake;
