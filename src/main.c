@@ -12,6 +12,7 @@ int main() {
     SetConfigFlags(FLAG_VSYNC_HINT);
     SetTargetFPS(144);
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Snek");
+    InitAudioDevice();
     struct game_window window = create_game_window("Snek", WINDOW_WIDTH, WINDOW_HEIGHT);
     struct snake snake = create_snake(window.center);
     struct pellet pellet = create_pellet(window, snake);
@@ -32,6 +33,7 @@ int main() {
         }
     #endif
 
+    CloseAudioDevice();
     CloseWindow();
     return 0;
 }
