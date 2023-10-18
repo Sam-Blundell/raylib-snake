@@ -24,26 +24,26 @@ void input_start(struct game_window *window) {
     }
 }
 
-void input_settings(struct game_window *window) {
+void input_settings(struct game_window *window, struct snake *snake) {
     if (IsKeyPressed(KEY_UP)) settings_menu.currentOption = (settings_menu.currentOption - 1 + settings_menu.numOptions) % settings_menu.numOptions;
     if (IsKeyPressed(KEY_DOWN)) settings_menu.currentOption = (settings_menu.currentOption + 1) % settings_menu.numOptions;
-    if (IsKeyPressed(KEY_ENTER)) {
-        switch (settings_menu.currentOption) {
-            case 0:
-                window->state = START_MENU;
-                break;
-            case 1:
-                window->borderless_mode = !window->borderless_mode;
-                break;
-            case 2:
-                window->sound_enabled = !window->sound_enabled;
-                break;
-            case 3:
-                // TODO: colour changing functionality.
-                break;
-            default:
-                break;
-        }
+    
+    switch (settings_menu.currentOption) {
+        case 0:
+            if (IsKeyPressed(KEY_ENTER)) window->state = START_MENU;
+            break;
+        case 1:
+            if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_LEFT)) window->borderless_mode = !window->borderless_mode;
+            break;
+        case 2:
+            if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_LEFT)) window->sound_enabled = !window->sound_enabled;
+            break;
+        case 3:
+            if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_RIGHT)) snake->colour = (snake->colour + 1 + 12) % 12;
+            if (IsKeyPressed(KEY_LEFT)) snake->colour = (snake->colour - 1 + 12) % 12;
+            break;
+        default:
+            break;
     }
 }
 
@@ -53,6 +53,9 @@ void input_play(struct game_window *window, struct snake *snake) {
     if (IsKeyPressed(KEY_UP)) turn_snake(snake, UP);
     if (IsKeyPressed(KEY_DOWN)) turn_snake(snake, DOWN);
     if (IsKeyPressed(KEY_ENTER)) window->state = PAUSE;
+    #ifdef __EMSCRIPTEN__
+    if (IsKeyPressed(KEY_ESCAPE)) window->state = PAUSE;
+    #endif
 }
 
 void input_pause(struct game_window *window, struct snake *snake) {
@@ -73,6 +76,9 @@ void input_pause(struct game_window *window, struct snake *snake) {
                 break;
         }
     }
+    #ifdef __EMSCRIPTEN__
+    if (IsKeyPressed(KEY_ESCAPE)) window->state = PLAY;
+    #endif
 }
 
 void input_gameover(struct game_window *window, struct snake *snake) {
@@ -85,7 +91,7 @@ void process_input(struct game_window *window, struct snake *snake) {
         input_start(window);
         break;
     case SETTINGS_MENU:
-        input_settings(window);
+        input_settings(window, snake);
         break;
     case PLAY:
         input_play(window, snake);

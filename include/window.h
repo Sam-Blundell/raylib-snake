@@ -9,6 +9,9 @@
 static const int WINDOW_WIDTH = 800;
 static const int WINDOW_HEIGHT = 600;
 
+
+extern Color game_colours[];
+
 enum game_state {
     START_MENU,
     SETTINGS_MENU,

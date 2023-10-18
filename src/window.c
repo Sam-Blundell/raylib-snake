@@ -7,6 +7,21 @@ const float STARTING_UPDATE_RATE = 0.2f;
 const float MIN_UPDATE_RATE = 0.06f;
 const int SPEED_INTERVAL = 5;
 
+Color game_colours[] = {
+    WHITE,
+    RED,
+    ORANGE,
+    YELLOW,
+    GREEN,
+    BLUE,
+    PURPLE,
+    PINK,
+    BROWN,
+    LIGHTGRAY,
+    GRAY,
+    DARKGRAY,
+};
+
 struct game_window create_game_window(const char *title, int width, int height) {
     struct game_window window = {
         .title = title,

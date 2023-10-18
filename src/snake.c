@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "snake.h"
 #include "soundhandler.h"
+#include "draw.h"
 
 const char LEFT = 'l';
 const char RIGHT = 'r';
@@ -14,6 +15,7 @@ struct snake create_snake(Vector2 start_position) {
         .direction = RIGHT,
         .turning = false,
         .sounds = load_snake_sounds(),
+        .colour = 0,
     };
     snake.body[0] = start_position;
     return snake;
@@ -76,8 +78,10 @@ void update_snake(struct snake *snake, struct game_window window) {
 }
 
 void draw_snake(struct snake snake) {
-    DrawRectangleV(snake.body[0], (Vector2){snake.width, snake.width}, LIGHTGRAY);
+    Color body_color = game_colours[snake.colour];
+    Color head_color = darken_color(body_color, 0.7f);
+    DrawRectangleV(snake.body[0], (Vector2){snake.width, snake.width}, head_color);
     for (int i = 1; i < snake.length; i++) {
-        DrawRectangleV(snake.body[i], (Vector2){snake.width, snake.width}, WHITE);
+        DrawRectangleV(snake.body[i], (Vector2){snake.width, snake.width}, body_color);
     }
 }

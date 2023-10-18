@@ -1,6 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include "raylib.h"
+
 #define TITLE_FONT_SIZE 120
 #define MENU_FONT_SIZE 40
 #define SPACING 80
@@ -14,8 +16,12 @@ enum start_menu_options {
 
 struct menu {
     const char *title;
+    Color titleColour;
+    int titleFontSize;
+    int startYPos;
     const char **options;
     int numOptions;
+    int menuFontSize;
     int currentOption;
 };
 

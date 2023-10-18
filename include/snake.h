@@ -19,6 +19,7 @@ struct snake {
     char direction;
     bool turning;
     struct snake_sounds sounds;
+    int colour;
 };
 
 struct snake create_snake(Vector2);
