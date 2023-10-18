@@ -4,3 +4,4 @@ snake.dSYM
 obj
 dep
 bin
+.DS_Store

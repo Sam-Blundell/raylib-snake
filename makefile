@@ -3,7 +3,7 @@ CC = emcc
 CFLAGS = -Os -Iinclude -I./raylib/src -Wall
 LFLAGS = -s USE_GLFW=3 -s USE_LIBPNG=1 -s FULL_ES3=1 -s ALLOW_MEMORY_GROWTH=1 \
 --preload-file resources -s TOTAL_MEMORY=67108864 -s FORCE_FILESYSTEM=1 \
--s ASSERTIONS=1 --profiling -lraylib
+-s ASSERTIONS=1 --profiling -lraylib --shell-file ./custom_shell.html
 LIBS = -L./raylibweb -lraylib 
 OUTPUT = bin/snake.html
 else
