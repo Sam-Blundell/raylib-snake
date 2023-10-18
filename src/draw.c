@@ -11,6 +11,11 @@ int center_text(const char *title, int fontSize, int yPos) {
     return xPos;
 }
 
+// Idea for showing the options in a menu:
+// Have a menu with a blank title and if the title is blank
+// the xpos value is shifted to the right by a certain amount.
+// This way the options can be shown in a column.
+
 void draw_menu(struct menu menu) {
     int yPos = 100;
     int xPos = center_text(menu.title, TITLE_FONT_SIZE, yPos);
@@ -30,10 +35,7 @@ void draw_play(struct snake *snake, struct pellet *pellet, struct game_window wi
 void draw_pause(struct snake snake, struct pellet pellet) {
     draw_pellet(pellet);
     draw_snake(snake);
-    DrawText("Pause", 340, 200, 40, WHITE);
-    DrawText("Press P to un-pause", 260, 300, 25, WHITE);
-    DrawText("Press R To Restart", 255, 350, 25, WHITE);
-    DrawText("Press S To Return To Start Menu", 255, 400, 25, WHITE);
+    draw_menu(pause_menu);
 }
 
 void draw_gameover(struct snake snake, struct pellet pellet) {

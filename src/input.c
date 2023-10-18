@@ -16,6 +16,7 @@ void input_start(struct game_window *window) {
                 window->state = SETTINGS_MENU;
                 break;
             case QUIT:
+                // TODO: Fix unloading snake sounds.
                 // unload_snake_sounds(snake.sounds);
                 CloseAudioDevice();
                 CloseWindow();
@@ -41,6 +42,7 @@ void input_settings(struct game_window *window) {
                 window->sound_enabled = !window->sound_enabled;
                 break;
             case 3:
+                // TODO: colour changing functionality.
                 break;
             default:
                 break;
@@ -53,13 +55,27 @@ void input_play(struct game_window *window, struct snake *snake) {
     if (IsKeyPressed(KEY_RIGHT)) turn_snake(snake, RIGHT);
     if (IsKeyPressed(KEY_UP)) turn_snake(snake, UP);
     if (IsKeyPressed(KEY_DOWN)) turn_snake(snake, DOWN);
-    if (IsKeyPressed(KEY_P)) window->state = PAUSE;
+    if (IsKeyPressed(KEY_ENTER)) window->state = PAUSE;
 }
 
 void input_pause(struct game_window *window, struct snake *snake) {
-    if (IsKeyPressed(KEY_P)) window->state = PLAY;
-    if (IsKeyPressed(KEY_S)) reset_game(window, snake, START_MENU);
-    if (IsKeyPressed(KEY_R)) reset_game(window, snake, PLAY);
+    if (IsKeyPressed(KEY_UP)) pause_menu.currentOption = (pause_menu.currentOption - 1 + pause_menu.numOptions) % pause_menu.numOptions;
+    if (IsKeyPressed(KEY_DOWN)) pause_menu.currentOption = (pause_menu.currentOption + 1) % pause_menu.numOptions;
+    if (IsKeyPressed(KEY_ENTER)) {
+        switch (pause_menu.currentOption) {
+            case 0:
+                window->state = PLAY;
+                break;
+            case 1:
+                reset_game(window, snake, START_MENU);
+                break;
+            case 2:
+                reset_game(window, snake, PLAY);
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 void input_gameover(struct game_window *window, struct snake *snake) {

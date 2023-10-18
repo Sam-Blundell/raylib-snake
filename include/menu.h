@@ -21,5 +21,6 @@ struct menu {
 
 extern struct menu start_menu;
 extern struct menu settings_menu;
+extern struct menu pause_menu;
 
 #endif // MENU_H
