@@ -26,7 +26,7 @@ int main() {
 
         emscripten_set_main_loop_arg(web_loop, &data, 0, 1);
     #else
-        while (!WindowShouldClose()) {
+        while (!WindowShouldClose() && !window.quit) {
             draw_input_update(&window, &snake, &pellet);
         }
     #endif

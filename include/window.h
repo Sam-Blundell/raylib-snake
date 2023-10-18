@@ -29,6 +29,7 @@ struct game_window {
     enum game_state state;
     bool borderless_mode;
     bool sound_enabled;
+    bool quit;
 };
 
 struct game_data {

@@ -41,9 +41,7 @@ void draw_pause(struct snake snake, struct pellet pellet) {
 void draw_gameover(struct snake snake, struct pellet pellet) {
     draw_pellet(pellet);
     draw_snake(snake);
-    DrawText("Game Over", 290, 200, 40, RED);
-    DrawText("Press R To Restart", 255, 300, 25, WHITE);
-    DrawText("Press S To Return To Start Menu", 255, 350, 25, WHITE);
+    draw_menu(game_over_menu);
 }
 
 void draw_screen(struct game_window window, struct snake *snake, struct pellet *pellet) {

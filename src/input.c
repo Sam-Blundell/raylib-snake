@@ -16,10 +16,7 @@ void input_start(struct game_window *window) {
                 window->state = SETTINGS_MENU;
                 break;
             case QUIT:
-                // TODO: Fix unloading snake sounds.
-                // unload_snake_sounds(snake.sounds);
-                CloseAudioDevice();
-                CloseWindow();
+                window->quit = true;
                 break;
             default:
                 break;
@@ -79,8 +76,7 @@ void input_pause(struct game_window *window, struct snake *snake) {
 }
 
 void input_gameover(struct game_window *window, struct snake *snake) {
-    if (IsKeyPressed(KEY_R)) reset_game(window, snake, PLAY);
-    if (IsKeyPressed(KEY_S)) reset_game(window, snake, START_MENU);
+    if (IsKeyPressed(KEY_ENTER)) reset_game(window, snake, START_MENU);
 }
 
 void process_input(struct game_window *window, struct snake *snake) {

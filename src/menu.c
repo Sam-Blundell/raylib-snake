@@ -19,6 +19,10 @@ const char *pause_menu_options[] = {
     "Restart",
 };
 
+const char *gameover_menu_options[] = {
+    "Press Enter",
+};
+
 struct menu start_menu = {
     .title = "SNEK",
     .options = start_menu_options,
@@ -37,5 +41,12 @@ struct menu pause_menu = {
     .title = "Paused",
     .options = pause_menu_options,
     .numOptions = sizeof(pause_menu_options) / sizeof(pause_menu_options[0]),
+    .currentOption = 0,
+};
+
+struct menu game_over_menu = {
+    .title = "GAME OVER",
+    .options = gameover_menu_options,
+    .numOptions = sizeof(gameover_menu_options) / sizeof(gameover_menu_options[0]),
     .currentOption = 0,
 };
